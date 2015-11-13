@@ -1,0 +1,22 @@
+func def!(x name x value)
+{
+	 x var = (env.getCar()).find(name);
+	if(var.isPair())
+	{
+	listValue.setCdr(var);
+	Cons(listNameValue, (env.getCar()).setCar(env));
+	}
+}
+
+if (((exp.getCdr()).getCar()).isSymbol())
+{
+	def!( (exp.getCdr() ).getCar(), eval( ( (exp.getCdr() ).getCdr() ).getCar(), env));
+	y name = ( (exp.getCdr() ).getCar() ).getCar();
+	y parm = ( (exp.getCdr() ).getCar() ).getCdr();
+	y body = ( exp.getCdr() ).getCdr();
+	y value = (eval( ('lambda) ( (parm) body) ) env);
+	def!(((name, value)));
+}
+
+// alternatively 
+def!( ( (exp.getCdr() ).getCar() ).getCar(), (eval( ('lambda) ( (( (exp.getCdr() ).getCar() ).getCdr()) ( exp.getCdr() ).getCdr()) ) env) )
