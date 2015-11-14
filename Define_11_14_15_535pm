@@ -1,0 +1,47 @@
+// Define -- Parse tree node strategy for printing the special form define
+
+using System;
+
+namespace Tree
+{
+    public class Define : Special
+    {
+	public Define() { }
+
+        public override void print(Node t, int n, bool p)
+        {
+            Printer.printDefine(t, n, p);
+        }
+
+        public override Node eval(Tree.Cons exp, Tree.Environment env)
+        {
+
+
+            Node ident = exp.getCdr().getCar();
+            Node val = exp.getCdr().getCdr().getCar();
+            env.define(ident, val.eval(env));
+            return Nil.getInstance();
+
+
+            /*
+
+            env.define(exp.getCdr().getCar(), exp.getCdr().getCdr().getCar().eval(env));
+        	Console.WriteLine(exp.getCdr().getCdr().getCar());
+        	Console.WriteLine(exp.getCdr().getCar().getName());
+        	return Nil.getInstance();
+            */    	
+           	//Node temp = (Node) (val.getCar()).eval(env);
+        	//new definition entered into environment
+        	//env.assign(id, temp);
+        	//return val; //FIXME NEED IMPLICIT BEGIN with env, x, and y
+        	//return new StringLit("Error: builtin.eval not yet implemented");
+
+
+
+        	//env.assign((val.getCar()), (val.getCdr()).eval
+        }
+        
+    }
+}
+
+
