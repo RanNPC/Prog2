@@ -1,0 +1,41 @@
+// Define -- Parse tree node strategy for printing the special form define
+
+using System;
+
+namespace Tree
+{
+    public class Define : Special
+    {
+	public Define() { }
+        
+        public override void print(Node t, int n, bool p)
+        {
+            Printer.printDefine(t, n, p);
+        }
+        public override Node eval(Tree.Cons exp, Tree.Environment env)
+        {
+           // getcdrgetcar() define phrase
+            //    definephrase.getcdr for x, call define with x and body
+
+            Node definephrase = exp.getCdr().getCar();
+            Lambda lamb = new Lambda();
+
+            if (!exp.getCdr().getCar().isSymbol())
+            {
+                Console.WriteLine("Inside Tree.Cons if");
+                env.define(definephrase.getCar(), lamb.eval(exp, env));
+                return Nil.getInstance();
+            }
+            else
+            {
+                Node ident = exp.getCdr().getCar();
+                Node val = exp.getCdr().getCdr().getCar();
+                env.define(ident, val.eval(env));
+                return Nil.getInstance();
+            }
+        }
+        
+    }
+}
+
+
