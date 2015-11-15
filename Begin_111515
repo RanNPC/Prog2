@@ -1,0 +1,44 @@
+// Begin -- Parse tree node strategy for printing the special form begin
+
+using System;
+
+namespace Tree
+{
+    public class Begin : Special
+    {
+		public Begin() { }
+
+        public override void print(Node t, int n, bool p)
+        {
+            Printer.printBegin(t, n, p);
+        }
+
+        /*
+		(define (evalbody l env)
+		(car (reverse (evallist l env))))
+
+        (define (evallist l env)
+		(map (lambda (x) (eval x env)) l))
+		*/
+		
+		public override Node eval(Tree.Cons exp, Tree.Environment env)
+        {
+
+            //if (exp.getCar().Equals("begin"))
+            //Console.WriteLine(exp.getCar().getName());
+            //Console.WriteLine("made it");
+            return otherbegin(exp, env);
+            //Node temp = new Node();
+            //while (exp.getCdr() != Nil.getInstance())
+        	//{
+                // exp.getCar().eval(env);
+            //    exp.getCdr().eval(env);
+            //    exp.getCar().eval(env);
+                //temp = exp.getCar().getCdr();
+            //    exp = (Tree.Cons) temp;
+        	//}
+        	//return temp.getCar().eval(env);
+        }
+    }
+}
+
