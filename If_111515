@@ -1,0 +1,35 @@
+// If -- Parse tree node strategy for printing the special form if
+
+using System;
+
+namespace Tree
+{
+    public class If : Special
+    {
+	public If() { }
+
+        public override void print(Node t, int n, bool p)
+        {
+            Printer.printIf(t, n, p);
+        }
+
+     //implement eval
+
+        public override Node eval(Tree.Cons exp, Tree.Environment env)
+        {
+        	Node cond = exp.getCdr().getCar();
+        	Node then = exp.getCdr().getCdr().getCar();
+        	Node aelse = exp.getCdr().getCdr().getCdr().getCar(); 
+
+        	if(cond.eval(env) != BoolLit.getInstance(false))
+        	{
+        		return then.eval(env); 
+        	}
+        	else
+        	{
+        		return aelse.eval(env); 
+        	}
+        }
+    }
+}
+
