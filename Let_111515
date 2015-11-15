@@ -1,0 +1,45 @@
+// Let -- Parse tree node strategy for printing the special form let
+
+using System;
+
+namespace Tree
+{
+    public class Let : Special
+    {
+	public Let() { }
+
+        public override void print(Node t, int n, bool p)
+        {
+            Printer.printLet(t, n, p);
+        }
+        
+        public override Node eval(Tree.Cons exp, Tree.Environment env)	//FIXME
+        {
+            Environment envro = new Environment();    //Add back in to replace env later
+            Node tempcar = exp.getCdr().getCar();
+        	while(tempcar != Nil.getInstance())
+        	{
+                Node tempx = tempcar.getCar().getCar();
+                Node tempy = tempcar.getCar().getCdr().getCar();
+                envro.define(tempx, tempy);
+                tempcar = tempcar.getCdr();
+            }
+            return otherbegin(exp, envro);
+
+            ////tempcar = (Tree.Cons)tempcar;
+            //  temp.eval((Tree.Cons)tempr, env);     //This may return the first instead of the last.
+            //Node tempr = new Node();
+            //Begin temp = new Begin();
+            //exp = (Tree.Cons) exp.getCdr();
+            //Cons exphold = exp;
+            //FIXME return begin
+            // tempr = tempcar.getCdr().getCar();
+            //.getCdr().getCar().getCar()//get x
+            //.getCdr().getCar().getCdr() //get 5
+            //getcdr().getcar()   //define list
+            //env.define(tempcar.getCar(), tempcar.getCdr().getCar());
+            
+            //getcdr().getCdr() //rest of statement
+        }
+    }
+}
