@@ -1,0 +1,64 @@
+// Quote -- Parse tree node strategy for printing the special form quote
+
+using System;
+
+namespace Tree
+{
+    public class Quote : Special
+    {
+        public Quote() { }
+
+        public override void print(Node t, int n, bool p)
+        {
+            Printer.printQuote(t, n, p);
+        }
+
+        public override Node eval(Tree.Cons exp, Tree.Environment env)
+        {
+            //Console.WriteLine("quote.eval is here");
+            if (exp.getCdr() != Nil.getInstance())
+            {
+               // Console.WriteLine(exp.getCdr().getCar().getCar().eval(env));
+                return exp.getCdr().getCar();
+            }
+            else
+            {
+                return new StringLit("Error: getCdr is null");      //FIXMEMay need to replace with nil
+            }
+        }
+        /*
+        public int length(list blist)
+        {
+            int len = 0;
+            while (blist.getCar() != Tree.Nil.getInstance())
+            {
+                len = len + leng(blist.getCar(), len);
+
+            }
+            if (len == 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return len;
+            }
+        }
+
+        private int leng(list blist, int len)
+        {
+            if (blist.getCar() != Tree.Nil.getInstance())
+            {
+                len++;
+                leng(blist.getCar(), len);
+            }
+            if (blist.getCdr() != Tree.Nil.getInstance())
+            {
+                len++;
+                leng(blist.getCdr(), len);
+            }
+            return len;
+        }
+        */
+    }
+}
