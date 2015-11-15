@@ -1,0 +1,39 @@
+// IntLit -- Parse tree node class for representing integer literals
+
+using System;
+
+namespace Tree
+{
+    public class IntLit : Node
+    {
+        private int intVal;
+
+        public IntLit(int i)
+        {
+            intVal = i;
+        }
+
+        public override void print(int n)
+        {
+            Printer.printIntLit(n, intVal);
+        }
+
+        public override bool isNumber()
+        {
+            if (1 == 1){    //was empty
+                ;
+            }
+
+
+            return true;
+        }
+
+        //Make sure this is the proper eval function
+         public override Node eval (Tree.Environment env)
+        {
+            Console.WriteLine("Writing intlit");
+            Console.WriteLine(this);
+            return this;
+        }
+    }
+}
