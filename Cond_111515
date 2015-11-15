@@ -1,0 +1,52 @@
+// Cond -- Parse tree node strategy for printing the special form cond
+
+using System;
+
+namespace Tree
+{
+    public class Cond : Special
+    {
+        public Cond() { }
+
+        public override void print(Node t, int n, bool p)
+        {
+            Printer.printCond(t, n, p);
+        }
+
+        /*  bool 
+            if true
+            begin everything
+            at first that satisfies the true conditional gets evaluated
+            run begin
+            else run begin ???
+        */
+        /*  If ifa = new If();
+            eval(Tree.Cons exp, Tree.Environment env);
+        */
+
+        public override Node eval(Tree.Cons exp, Tree.Environment env)	//FIXME
+        {
+            If ifa = new If();
+            Node ifo = new Node();
+            Node tempcar = exp.getCdr();
+            while (tempcar != Nil.getInstance())
+            {
+                if(tempcar.getCar().getCar().getName() == "else")
+                {
+                    return otherbegin((Tree.Cons)tempcar.getCar().getCdr(), env);
+                }
+                else if(tempcar.getCar().getCar() == BoolLit.getInstance(true))
+                {
+                    return otherbegin((Tree.Cons)tempcar.getCar().getCdr(), env);
+                }
+                else
+                {
+                    tempcar = tempcar.getCdr();
+                }
+            }
+            return new StringLit("Error: Invalid Conditional");
+        }
+    }
+}
+
+
